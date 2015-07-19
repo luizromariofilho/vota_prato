@@ -1,4 +1,15 @@
 class Restaurante < ActiveRecord::Base
+
+  scope :massas, -> {
+    where(:especialidade => "massa")
+  }
+  scope :recentes, -> {
+    where(["created_at > ?",3.months.ago])
+  }
+  scope :pelo_nome,->{
+    order('nome')
+  }
+
 	has_many :qualificacoes
 	has_and_belongs_to_many :pratos
 	
